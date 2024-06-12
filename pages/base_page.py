@@ -1,12 +1,13 @@
 import allure
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium import webdriver
 from selenium.webdriver.support import expected_conditions
+from selenium import webdriver
+import pytest
 
 
 class BasePage:
 
-    def __init__(self, driver):
+    def __init__(self, driver: webdriver):
         self.driver = driver
 
     @allure.step('Получить текущий адрес страницы')

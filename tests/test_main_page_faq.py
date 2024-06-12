@@ -1,6 +1,6 @@
 import allure
 import pytest
-from helpers import *
+from conftest import *
 from pages.scooter_main_page import ScooterMainPage
 from URLs import *
 
