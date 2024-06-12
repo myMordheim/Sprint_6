@@ -2,7 +2,6 @@ import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium import webdriver
-import pytest
 
 
 class BasePage:
@@ -18,6 +17,14 @@ class BasePage:
     def wait_url_change(self, url):
         WebDriverWait(self.driver, 5).until(expected_conditions.url_changes(url))
 
+    @allure.step('Найти элемент')
+    def find_element(self, locator=tuple):
+        self.driver.find_element(locator)
+        try:
+            return WebDriverWait(self.driver).until(expected_conditions.presence_of_element_located(locator))
+        except:
+            print(f'Элемент {locator} не был найден')
+
     @allure.step('Кликнуть на элемент')
     def click_element(self, locator=tuple):
         element = self.find_element(locator)
@@ -31,7 +38,4 @@ class BasePage:
         try:
             return self.find_element(locator).text
         except:
-            print (f'Невозможно отобразить текст по элементу{locator}')
-
-
-
+            print(f'Невозможно отобразить текст по элементу{locator}')
