@@ -5,7 +5,7 @@ from pages.base_page import BasePage
 from selenium import webdriver
 
 
-class ScooterMainPage:
+class ScooterMainPage(BasePage):
     cookies_button = (By.XPATH, './/button[text()="да все привыкли"]')
     order_button = (By.XPATH, '.// button[text() = "Заказать"]')
     faq_0 = (By.XPATH, './/div[@id=accordion__heading-0]')
