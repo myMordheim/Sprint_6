@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 import allure
 from helpers import FaqAnswers
 from pages.base_page import BasePage
-from selenium import webdriver
 
 
 class ScooterMainPage(BasePage):
@@ -37,11 +36,11 @@ class ScooterMainPage(BasePage):
 
     @allure.step('Клик по кнопке "да все привыкли"')
     def click_cookies_button(self):
-        self.click(self.cookies_button)
+        self.click_element(self.cookies_button)
 
     @allure.step('Клик по кнопке "Заказать"')
     def click_order_button(self):
-        self.click(self.order_button)
+        self.click_element(self.order_button)
 
     @allure.step('Нажать и раскрыть FAQ')
     def click_faq(self, faq):

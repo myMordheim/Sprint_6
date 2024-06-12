@@ -21,7 +21,7 @@ class BasePage:
     def find_element(self, locator=tuple):
         self.driver.find_element(locator)
         try:
-            return WebDriverWait(self.driver).until(expected_conditions.presence_of_element_located(locator))
+            return WebDriverWait(self.driver, 3).until(expected_conditions.presence_of_element_located(locator))
         except:
             print(f'Элемент {locator} не был найден')
 
