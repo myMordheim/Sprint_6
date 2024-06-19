@@ -5,8 +5,11 @@ from pages.base_page import BasePage
 
 
 class ScooterMainPage(BasePage):
-    cookies_button = [By.XPATH, './/button[text()="да все привыкли"]']
+    cookies_button = (By.XPATH, './/button[text()="да все привыкли"]')
     order_button = (By.XPATH, './/button[text()="Заказать"]')
+    samokat_header = (By.XPATH, './/a[2]/img')
+    yandex_dzen_header = (By.XPATH, './/a[1]/img')
+    middle_order_button = (By.XPATH, './/div[@class="Home_FinishButton__1_cWm"]/button')
     faq_0 = (By.XPATH, './/div[@id="accordion__heading-0"]')
     faq_1 = (By.XPATH, './/div[@id="accordion__heading-1"]')
     faq_2 = (By.XPATH, './/div[@id="accordion__heading-2"]')
@@ -43,6 +46,14 @@ class ScooterMainPage(BasePage):
     @allure.step('Клик по кнопке "Заказать"')
     def click_order_button(self):
         self.click_element(self.order_button)
+
+    @allure.step('Клик по кнопке "Заказать"')
+    def click_order_button_middle(self):
+        self.click_element(self.middle_order_button)
+
+    @allure.step('Клик на лого Яндекс Дзен')
+    def click_ya_logo(self):
+        self.click_element(self.yandex_dzen_header)
 
     @allure.step('Скролл к FAQ')
     def scroll_to_faq(self, faq):

@@ -35,10 +35,21 @@ class BasePage:
 
     @allure.step('Найти текст')
     def find_text_element(self, locator):
-        text = WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator)).text
-        return text
+        return WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator)).text
+
+    @allure.step('Написать текст в инпут')
+    def send_text(self, locator, text):
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator)).send_keys(text)
 
     @allure.step('Проскроллить к элементу')
     def scroll_to_element(self, locator):
         WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator))
         self.driver.execute_script("arguments[0].scrollIntoView();", self.find_element(locator))
+
+    @allure.step('Перейты в новое открытое окно')
+    def switch_to_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[1])
+
+    @allure.step('Ожидание смены тайтла вкладки')
+    def title_window_change_wait(self, title):
+        WebDriverWait(self.driver, 5).until(expected_conditions.title_is(title))
