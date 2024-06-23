@@ -1,22 +1,25 @@
 import allure
-import time
-import URLs
+from locators.order_locators import *
 from conftest import *
 from pages.scooter_main_page import ScooterMainPage
 from pages.order_page import OrderPage
 from URLs import *
+
+
 class TestOrder:
 
     @allure.title("Позитивный пользовательский путь заказа самоката")
     @allure.description('Проверка функциональности всех инпутов, дропдаунов меню, при позитивном пользовательском пути')
-    @pytest.mark.parametrize('metro, date, delivery_date, color, name, surname, adress, number, comment', OrderPage.data_for_parametrize_order_test)
-    def test_click_faq_and_show_answer(self, driver, metro, date, delivery_date, color, name, surname, adress, number, comment):
+    @pytest.mark.parametrize('metro, date, delivery_date, color, name, surname, adress, number, comment',
+                             data_for_parametrize_order_test)
+    def test_click_faq_and_show_answer(self, driver, metro, date, delivery_date, color, name, surname, adress, number,
+                                       comment):
         main_page = ScooterMainPage(driver)
         order_page = OrderPage(driver)
         main_page.change_url(base_url)
         main_page.click_cookies_button()
         main_page.click_order_button_middle()
-        main_page.wait_for_element_visability(OrderPage.order_form_header_test)
+        main_page.wait_for_element_visability(order_form_header_test)
         order_page.input_name(name)
         order_page.input_surname(surname)
         order_page.input_adress(adress)
@@ -32,4 +35,5 @@ class TestOrder:
         order_page.input_comment(comment)
         order_page.click_an_order_button()
         order_page.confrim_order()
-        assert 'Заказ оформлен' in order_page.text_order_confirmed()
+        with allure.step("Проверка появления модального сообщения 'Заказ оформлен'"):
+            assert order_page.text_order_confirmed()

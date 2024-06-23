@@ -23,7 +23,16 @@ class BasePage:
 
     @allure.step('Найти элемент')
     def find_element(self, locator):
-        self.driver.find_element(locator)
+        self.driver.find_element(*locator)
+        try:
+            return WebDriverWait(self.driver).until(expected_conditions.presence_of_element_located(locator))
+        except TimeoutException:
+            print(f'"Элемент с локатором - "{locator} не найден')
+            return None
+
+    @allure.step('Найти элемент')
+    def find_element_for_result(self, locator):
+        return self.driver.find_element(locator)
 
     @allure.step('Кликнуть на элемент')
     def click_element(self, locator):

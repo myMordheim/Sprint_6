@@ -4,6 +4,8 @@ from conftest import *
 from pages.scooter_main_page import ScooterMainPage
 from pages.order_page import OrderPage
 from pages.ya_page import YaPage
+from locators.order_locators import *
+from locators.scooter_locators import *
 from URLs import *
 
 
@@ -28,6 +30,7 @@ class TestMainPage:
         order_page.change_url(order_url)
         order_page.click_samokat_logo()
         assert main_page.get_current_url() == URLs.base_url
+
     @allure.title('Проверка функциональности перехода в заказ через кнопку "Заказать"')
     @allure.description("Клик по кнопке 'Заказать' в середине страницы")
     def test_click_order_button_header(self, driver):
@@ -35,7 +38,7 @@ class TestMainPage:
         main_page.change_url(base_url)
         main_page.click_cookies_button()
         main_page.click_order_button_middle()
-        main_page.wait_for_element_visability(OrderPage.order_form_header_test)
+        main_page.wait_for_element_visability(order_form_header_test)
         assert main_page.get_current_url() == URLs.order_url
 
     @allure.title('Проверка функциональности перехода в заказ через кнопку "Заказать"')
@@ -45,12 +48,12 @@ class TestMainPage:
         main_page.change_url(base_url)
         main_page.click_cookies_button()
         main_page.click_order_button()
-        main_page.wait_for_element_visability(OrderPage.order_form_header_test)
+        main_page.wait_for_element_visability(order_form_header_test)
         assert main_page.get_current_url() == URLs.order_url
 
     @allure.title("Проверка функционала FAQ")
     @allure.description('Клик на элемент FAQ и отображение элемента "Ответ"')
-    @pytest.mark.parametrize('faq, faq_answer, assert_faq_answer', ScooterMainPage.faq_data_parametrize)
+    @pytest.mark.parametrize('faq, faq_answer, assert_faq_answer', faq_data_parametrize)
     def test_click_faq_and_show_answer(self, driver, faq, faq_answer, assert_faq_answer):
         main_page = ScooterMainPage(driver)
         main_page.change_url(base_url)
