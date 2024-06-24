@@ -21,7 +21,7 @@ color_gray = (By.XPATH, ".//input[@id = 'grey']")
 comment_for_courier = (By.XPATH, ".//input[@placeholder = 'Комментарий для курьера']")
 make_an_order_button = (By.XPATH, ".//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM']")
 confirm_an_order_button = (By.XPATH, ".//button[text() = 'Да']")
-for_assert = (By.XPATH, './/div[@class="Order_ModalHeader__3FDaJ"]')
+for_assert = (By.XPATH, './/div[text()[contains(.,"Заказ оформлен")]]')
 samokat_header = (By.XPATH, './/a[2]/img')
 yandex_dzen_header = (By.XPATH, './/a[1]/img')
 

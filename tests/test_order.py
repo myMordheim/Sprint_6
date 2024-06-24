@@ -36,4 +36,4 @@ class TestOrder:
         order_page.click_an_order_button()
         order_page.confrim_order()
         with allure.step("Проверка появления модального сообщения 'Заказ оформлен'"):
-            assert order_page.text_order_confirmed()
+            assert order_page.for_assert_order

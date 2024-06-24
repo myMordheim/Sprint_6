@@ -76,3 +76,7 @@ class OrderPage(BasePage):
     @allure.step('Клик на лого Самокат')
     def click_samokat_logo(self):
         self.click_element(samokat_header)
+
+    @allure.step('Ожидание видимости элемента "Заказ оформлен"')
+    def for_assert_order(self):
+        self.wait_for_visability(for_assert)

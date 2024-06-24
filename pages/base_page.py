@@ -17,6 +17,10 @@ class BasePage:
     def change_url(self, url):
         self.driver.get(url)
 
+    @allure.step('Ожидание оторбражения видимости элемента')
+    def wait_for_visability(self, locator):
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator))
+
     @allure.step('Ожидание: переход на другой url')
     def wait_url_change(self, url):
         WebDriverWait(self.driver, 5).until(expected_conditions.url_changes(url))
@@ -26,7 +30,7 @@ class BasePage:
         self.driver.find_element(*locator)
         try:
             return WebDriverWait(self.driver).until(expected_conditions.presence_of_element_located(locator))
-        except TimeoutException:
+        except:
             print(f'"Элемент с локатором - "{locator} не найден')
             return None
 
